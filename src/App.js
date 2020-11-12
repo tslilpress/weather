@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Forecast from './components/Forecast/Forecast'
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <h1>Weather</h1>
       </header>
       <main>
-
+        <Forecast/>
       </main>
       <footer>
         Page created by Tslil Press
@@ -17,4 +17,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
