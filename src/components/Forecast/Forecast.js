@@ -11,7 +11,7 @@ const Forecast = () => {
 
    function getForecast(event) {
        event.preventDefault()
-    fetch(`https://community-open-weather-map.p.rapidapi.com/weather?units=${unit}&q=${uriEncodeCity}`, {
+    fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?units=${unit}&q=${uriEncodeCity}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "3d1c8ca844mshaf005065fa525fcp1dc08djsnde222bc65b4d",
@@ -30,7 +30,7 @@ const Forecast = () => {
 
    return (
     <div>
-        <h2>Find Current Weather Conditions</h2>
+        <h2>Get your 5 day forecast</h2>
             <form onSubmit={getForecast}>
                 <input
                     type="text"
