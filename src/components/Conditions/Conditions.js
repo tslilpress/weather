@@ -9,7 +9,7 @@ const conditions = (props) => {
                 {props.responseObj.cod === "200" ?
                     <div>
                         <h1>{props.responseObj.city.name}</h1>
-                        <p>{moment(props.responseObj.list[0].dt_txt).format('llll')}</p>
+                        <p>{moment(props.responseObj.list[0].dt.txt).format('DD-MM-YYYY')}</p>
                         <p>{Math.round(props.responseObj.list[0].temp.day)} Degrees during the day</p>
                         <p>{Math.round(props.responseObj.list[0].temp.night)} Degrees at night</p>
                     </div>
