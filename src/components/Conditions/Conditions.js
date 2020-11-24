@@ -3,15 +3,26 @@ import moment from 'moment'
 
 
 const conditions = (props) => {
+    const formatDate = function (date) {
+        return moment.utc(date).format('dddd')
+    }
+
     console.log('props are ', props)
         return (
             <div>
                 {props.responseObj.cod === "200" ?
                     <div>
                         <h1>{props.responseObj.city.name}</h1>
-                        <p>{moment(props.responseObj.list[0].dt.txt).format('DD-MM-YYYY')}</p>
-                        <p>{Math.round(props.responseObj.list[0].temp.day)} Degrees during the day</p>
-                        <p>{Math.round(props.responseObj.list[0].temp.night)} Degrees at night</p>
+                        {props.responseObj.list.map(index => {
+                        return ( 
+                            <div className="dayCard">
+                                <h3>{formatDate(index.dt * 1000)}</h3>
+                                <h5>{Math.round(index.temp.day)}°/{Math.round(index.temp.night)}°</h5>
+                                <p>{index.weather[0].description}</p>
+                                <img src={`http://openweathermap.org/img/w/${index.weather[0].icon}.png`}/>
+                            </div>
+                        )})}
+                        
                     </div>
                  : null
                 }   

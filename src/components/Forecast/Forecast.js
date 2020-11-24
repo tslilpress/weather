@@ -11,7 +11,7 @@ const Forecast = () => {
 
    function getForecast(event) {
        event.preventDefault()
-    fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?units=${unit}&q=${uriEncodeCity}`, {
+    fetch(`https://community-open-weather-map.p.rapidapi.com/forecast/daily?units=${unit}&q=${uriEncodeCity}&cnt=5`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-key": "3d1c8ca844mshaf005065fa525fcp1dc08djsnde222bc65b4d",
