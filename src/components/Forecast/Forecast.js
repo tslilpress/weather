@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Conditions from '../Conditions/Conditions'
+import queryString from 'query-string'
 
 const Forecast = () => {
 
@@ -7,7 +8,12 @@ const Forecast = () => {
    let [responseObj, setResponseObj] = useState({})
    let [city, setCity] = useState('')
    let [unit, setUnit] = useState('imperial')
+   let [responseSong, setResponseSong] = useState({})
    const uriEncodeCity = encodeURIComponent(city)
+    
+    let parsed = queryString.parse(window.location.search)
+    let accessToken = parsed.access_token
+    console.log(accessToken)
 
    function getForecast(event) {
        event.preventDefault()
@@ -25,8 +31,26 @@ const Forecast = () => {
        })
     .catch(err => {
         console.error(err)
-    });
+    })
+    fetch("https://api.spotify.com/v1/recommendations?seed_artists=1G9G7WwrXka3Z1r7aIDjI7&seed_artists=2SfO2W7dVwEov6TpQW2uOg&seed_artists=6zvul52xwTWzilBZl6BUbT&seed_tracks=6b2oQwSGFkzsMtQruIWm2p&seed_genre=dance&market=US&danceability=0.0&valence=0.0&mode=1", {
+        "headers": { 'Authorization': 'Bearer ' + accessToken }
+    })
+        .then(response => response.json())
+        .then(response => {
+            setResponseSong(response)
+        })
    }
+
+//    function getSong(event) {
+//        event.preventDefault()
+//     fetch("https://api.spotify.com/v1/genre", {
+//         "headers": { 'Authorization': 'Bearer ' + accessToken }
+//     })
+//         .then(response => response.json())
+//         .then(response => {
+//             setResponseSong(response)
+//         })
+//    }
 
    return (
     <div>
@@ -65,6 +89,7 @@ const Forecast = () => {
             </form>
         <Conditions 
             responseObj={responseObj}
+            responseSong={responseSong}
             />
     </div>
     )
