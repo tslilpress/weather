@@ -11,7 +11,7 @@ const RainySong = () => {
 
     function getRainySong(event) {
         event.preventDefault()
-        fetch("https://api.spotify.com/v1/playlists/37i9dQZF1DXbvABJXBIyiY/tracks?fields=items(track(name,href,artists(name,href)))", {
+        fetch("https://api.spotify.com/v1/playlists/37i9dQZF1DXbvABJXBIyiY?fields=tracks.items(track(name,uri,artists(name,href)))", {
                 "headers": { 'Authorization': 'Bearer ' + accessToken }
             })
                 .then(response => response.json())
@@ -22,12 +22,11 @@ const RainySong = () => {
                     console.error(err)
                 })
     }
-    console.log('song', responseSong.items)
     return (
         <div>
+            {console.log('song', responseSong)}
             <button onClick={getRainySong}>Get Song</button>
-            <ShowRainySong
-            responseSong={responseSong}
+            <ShowRainySong responseSong={responseSong}
             />
         </div>
            
